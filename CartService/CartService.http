@@ -1,0 +1,21 @@
+@CartService_HostAddress = http://localhost:5232
+@userId = 00000000-0000-0000-0000-000000000001
+@itemId = 00000000-0000-0000-0000-000000000002
+
+### Get cart
+GET {{CartService_HostAddress}}/api/cart?userId={{userId}}
+
+### Add item to cart
+POST {{CartService_HostAddress}}/api/cart/items
+Content-Type: application/json
+
+{
+  "itemId": "{{itemId}}",
+  "quantity": 1,
+  "userId": "{{userId}}"
+}
+
+### Remove item from cart (decrements quantity, or removes if quantity is 1)
+DELETE {{CartService_HostAddress}}/api/cart/items/{{itemId}}?userId={{userId}}
+
+###
