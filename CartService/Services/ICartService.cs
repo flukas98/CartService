@@ -10,6 +10,8 @@ namespace CartService.Services
 
         Task<bool> RemoveItemFromUserCartAsync(Guid userId, Guid itemId);
 
+        Task<bool> DeleteCartAsync(Guid userId);
+
         Task<Cart?> GetCartAsync(Guid userId);
     }
 }

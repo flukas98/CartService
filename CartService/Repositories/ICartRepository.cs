@@ -13,6 +13,8 @@ namespace CartService.Repositories
 
         Task AddCartAsync(Cart cart);
 
+        Task RemoveCartAsync(Cart cart);
+
         Task SaveChangesAsync();
     }
 }

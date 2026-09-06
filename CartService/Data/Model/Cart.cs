@@ -16,12 +16,21 @@ namespace CartService.Data.Model
 
         public User? User { get; set; }
 
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        public DateTime ExpiresAt { get; set; }
+
         // Many-to-many via join entity
         public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
 
         // Convenience accessor returning items in the cart
         [NotMapped]
         public IEnumerable<Item> Items => CartItems?.Select(ci => ci.Item!).Where(i => i != null) ?? Enumerable.Empty<Item>();
+
+        public Cart()
+        {
+            ExpiresAt = CreatedAt.AddMinutes(30);
+        }
 
         public void AddItem(Item item, int quantity = 1)
         {

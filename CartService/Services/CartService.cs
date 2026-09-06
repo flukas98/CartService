@@ -62,5 +62,18 @@ namespace CartService.Services
 
             return true;
         }
+
+        public async Task<bool> DeleteCartAsync(Guid userId)
+        {
+            if (userId == Guid.Empty) return false;
+
+            var cart = await _repo.GetCartByUserIdAsync(userId);
+            if (cart == null) return false;
+
+            await _repo.RemoveCartAsync(cart);
+            await _repo.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

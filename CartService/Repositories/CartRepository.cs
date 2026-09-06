@@ -34,6 +34,12 @@ namespace CartService.Repositories
             await _db.Carts.AddAsync(cart);
         }
 
+        public Task RemoveCartAsync(Cart cart)
+        {
+            _db.Carts.Remove(cart);
+            return Task.CompletedTask;
+        }
+
         public async Task SaveChangesAsync()
         {
             await _db.SaveChangesAsync();

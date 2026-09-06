@@ -11,6 +11,10 @@ namespace CartService.Data.ViewModel
 
         public Guid UserId { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime ExpiresAt { get; set; }
+
         public List<CartItemViewModel> Items { get; set; } = new List<CartItemViewModel>();
 
         public decimal Total => Items.Sum(i => i.LineTotal);
@@ -21,6 +25,8 @@ namespace CartService.Data.ViewModel
             {
                 Id = cart.Id,
                 UserId = cart.UserId,
+                CreatedAt = cart.CreatedAt,
+                ExpiresAt = cart.ExpiresAt,
                 Items = cart.CartItems.Select(CartItemViewModel.FromModel).ToList()
             };
         }

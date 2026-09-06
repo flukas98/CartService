@@ -62,6 +62,17 @@ namespace CartService.Controllers
             return Ok();
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCart()
+        {
+            if (!TryGetUserId(out var userId)) return Unauthorized("Token does not contain a valid user id claim.");
+
+            var ok = await _cartService.DeleteCartAsync(userId);
+            if (!ok) return NotFound("Cart not found.");
+
+            return Ok();
+        }
+
         // The token's own claim is the only source of identity here — never accept
         // a caller-supplied user id, or any authenticated user could act on someone else's cart.
         private bool TryGetUserId(out Guid userId)
